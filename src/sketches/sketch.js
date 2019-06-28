@@ -28,8 +28,8 @@ export default function sketch(p){
   let x9 = 640;
   let y9 = 360;
   let right9 = true;
-  let x10 = 10;
-  let y10 = 100;
+  let x10 = 640;
+  let y10 = 360;
   let right10 = true;
   let x11 = 11;
   let y11 = 110;
@@ -37,6 +37,27 @@ export default function sketch(p){
   let sun = 100;
   let sunBright = true;
   let angleEarth = 0;
+  let sunSize = 80;
+  let earthSize = 20;
+  let preChorus = 0;
+  let sunColorRed = 200;
+  let sunColorGreen = 200;
+  let earthColorRed = 0;
+  let earthColorBlue = 200;
+  let earthColorGreen = 150;
+  let nova = 100;
+
+  let xEarth = x9 + (150 * p.cos(angleEarth))
+  let yEarth = y9 + (170 * p.sin(angleEarth))
+
+  let a = xEarth;
+  let b = yEarth;
+  let a1 = xEarth;
+  let b1 = yEarth;
+  let a2 = xEarth;
+  let b2 = yEarth;
+  let astX = xEarth;
+  let astY = yEarth;
 
   let sixteenth = 40;
 
@@ -160,12 +181,13 @@ export default function sketch(p){
 
       if (x8 <= 1230-(sixteenth*15)){
         //sun
-        c = p.color(200, 200, 0)
+        c = p.color(sunColorRed, sunColorGreen, 0)
         p.fill(c)
-        p.ellipse(x9, y9, 70, 70);
-        let d = p.color(200, 200, 0, sun)
+        p.ellipse(x9, y9, (sunSize*0.9), (sunSize*0.9));
+        let d = p.color(sunColorRed, sunColorGreen, 0, sun)
         p.fill(d)
-        p.ellipse(x9, y9, 80, 80);
+        p.ellipse(x9, y9, sunSize, sunSize);
+        // p.filter(p.BLUR, 10);
         if (sunBright){
           sun+=2
           if (sun >= 255){
@@ -180,15 +202,90 @@ export default function sketch(p){
         }
         //earth
 
-        let xEarth = x9 + (150 * p.cos(angleEarth))
-        let yEarth = y9 + (170 * p.sin(angleEarth))
+        xEarth = x9 + (150 * p.cos(angleEarth))
+        yEarth = y9 + (170 * p.sin(angleEarth))
 
-        let e = p.color(0, 150, 200)
+        let e = p.color(earthColorRed, earthColorGreen, earthColorBlue)
         p.fill(e)
-        p.ellipse(xEarth, yEarth, 20, 20)
+        p.ellipse(xEarth, yEarth, earthSize, earthSize)
         angleEarth = angleEarth + 0.04
         x9+=0.1
         y9+=0.1
+
+        if (x9 >= 754){
+          preChorus+=1
+          x9 = 640;
+          y9 = 360;
+        }
+
+        if (preChorus === 1){
+          // x9 = 640;
+          // y9 = 360;
+          x9+=0.1
+          y9+=0.1
+          sunSize = 100;
+          earthSize = 25;
+        }
+        if (preChorus === 2){
+          // x9 = 640;
+          // y9 = 360;
+          sunSize += 1;
+          if (earthSize <= 700){
+            earthSize+=0.1;
+          }
+          sunColorRed++
+          if (earthColorRed < 255){
+            earthColorRed++
+          }
+          if (earthColorBlue > 0){
+            earthColorBlue--
+          }
+          let novaColor = p.color(255, 0 , 0, 25)
+          p.fill(novaColor)
+          let novaObj = p.ellipse(x10, y10, nova, nova)
+          nova+=5
+        }
+        if (preChorus >= 3){
+          sunColorRed = 0;
+          sunColorGreen = 0;
+          if (earthColorRed > 40){
+            earthColorRed-=0.5
+            earthColorGreen-=0.5
+          }
+          else {
+            let f = p.color(120, 120, 120)
+            p.fill(f)
+            p.ellipse(a+1, b+2, 15, 10)
+            p.ellipse(a1+15, b+25, 5, 15)
+            p.ellipse(a-15, b1+21, 15, 12)
+            p.ellipse(a2-12, b1+14, 5, 4)
+            p.ellipse(a-15, b2-20, 2, 7)
+            let ast = p.ellipse(astX, astY, 12, 11)
+            a+=1
+            b+=0.5
+            a1-=0.5
+            b1-=0.7
+            a2+=3
+            b2+=1.7
+            astX-=0.5
+            astY+=0.1
+            earthSize-=0.5
+            earthColorRed-=0.1
+            earthColorGreen-=0.1
+          }
+          if (preChorus >= 4){
+
+            astX+=0.25
+            astY-=0.2
+          }
+
+          if (preChorus >= 5){
+            p.background(0, 0, 40);
+            astX+=0.25
+            astY-=0.2
+          }
+        }
+
       }
     }
 

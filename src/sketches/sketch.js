@@ -46,6 +46,19 @@ export default function sketch(p){
   let earthColorBlue = 200;
   let earthColorGreen = 150;
   let nova = 100;
+  let blackHoleXStart = 160;
+  let blackHoleYStart = 100;
+  let blackHoleXDist = 120;
+  let timerEllipseX = -10;
+  let timerEllipseY = 0
+  let timerInterval = 9.1;
+
+  let backgroundFlashR = 100;
+  let backgroundFlashG = 0;
+  let backgroundFlashB = 0;
+  let backgroundRSwitch = true;
+  let backgroundGSwitch = true;
+  let backgroundBSwitch = true;
 
   let xEarth = x9 + (150 * p.cos(angleEarth))
   let yEarth = y9 + (170 * p.sin(angleEarth))
@@ -58,6 +71,8 @@ export default function sketch(p){
   let b2 = yEarth;
   let astX = xEarth;
   let astY = yEarth;
+  let finalAsteroidSizeX = 12;
+  let finalAsteroidSizeY = 11;
 
   let sixteenth = 40;
 
@@ -98,6 +113,30 @@ export default function sketch(p){
     }
     if (x >= (sixteenth*14) && x <= 15+(sixteenth*14) || x <= 1280-(sixteenth*14) && x >= 1265+(sixteenth*14) ){
       p.ellipse(x-(sixteenth*14), y+90, 16, 16);
+    }
+  }
+
+  const blackHoles = (y, blackHoleDelay) => {
+    if (timerEllipseY > blackHoleDelay){
+      p.ellipse(blackHoleXStart + blackHoleXDist, y + blackHoleYStart, 100, 100)
+    }
+    if (timerEllipseY > blackHoleDelay + timerInterval){
+      p.ellipse(blackHoleXStart + (blackHoleXDist*2), y + blackHoleYStart, 100, 100)
+    }
+    if (timerEllipseY > (blackHoleDelay + timerInterval*2)){
+      p.ellipse(blackHoleXStart + (blackHoleXDist*3), y + blackHoleYStart, 100, 100)
+    }
+    if (timerEllipseY > (blackHoleDelay + timerInterval*3)){
+      p.ellipse(blackHoleXStart + (blackHoleXDist*4), y + blackHoleYStart, 100, 100)
+    }
+    if (timerEllipseY > (blackHoleDelay + timerInterval*4)){
+      p.ellipse(blackHoleXStart + (blackHoleXDist*5), y + blackHoleYStart, 100, 100)
+    }
+    if (timerEllipseY > (blackHoleDelay +timerInterval*5)){
+      p.ellipse(blackHoleXStart + (blackHoleXDist*6), y + blackHoleYStart, 100, 100)
+    }
+    if (timerEllipseY > (blackHoleDelay + timerInterval*6)){
+      p.ellipse(blackHoleXStart + (blackHoleXDist*7), y + blackHoleYStart, 100, 100)
     }
   }
 
@@ -279,10 +318,57 @@ export default function sketch(p){
             astY-=0.2
           }
 
-          if (preChorus >= 5){
-            p.background(0, 0, 40);
+          if (astX <= 280){
+            p.background(0, 0, 140);
+            let ast = p.ellipse(astX, astY, finalAsteroidSizeX, finalAsteroidSizeY)
             astX+=0.25
             astY-=0.2
+            let blackHole = p.color(0, 0, 0)
+            p.fill(blackHole)
+            p.noStroke()
+            // let blackHoleInd = 0;
+            let timerEllipse = p.ellipse(timerEllipseX, timerEllipseY, 1, 1)
+            blackHoles(0, 0);
+            blackHoles(200, timerInterval*16);
+            finalAsteroidSizeX = 0;
+            finalAsteroidSizeY = 0;
+            blackHoles(400, timerInterval*32);
+            if (timerEllipseY < 2000){
+              timerEllipseY++
+              if (timerEllipseY > timerInterval*64 && timerEllipseY < timerInterval*192){
+                p.background(backgroundFlashR, backgroundFlashG, backgroundFlashB)
+                //green control
+                if (backgroundGSwitch){
+                  backgroundFlashG+=5;
+                  if (backgroundFlashG >= 250){
+                    backgroundGSwitch = false;
+                  }
+                }
+                else if (!backgroundGSwitch) {
+                  backgroundFlashG-=5;
+                  if (backgroundFlashG <= 0){
+                    backgroundGSwitch = true;
+                  }
+                }
+                //blue control
+                if (backgroundBSwitch){
+                  backgroundFlashB+=10;
+                  if (backgroundFlashB >= 250){
+                    backgroundBSwitch = false;
+                  }
+                }
+                else if (!backgroundBSwitch) {
+                  backgroundFlashB-=10;
+                  if (backgroundFlashB <= 0){
+                    backgroundBSwitch = true;
+                  }
+                }
+                p.fill(blackHole)
+                p.ellipse(640, 360, 200, 200)
+              }
+
+            }
+
           }
         }
 

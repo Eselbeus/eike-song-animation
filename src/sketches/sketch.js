@@ -51,7 +51,7 @@ export default function sketch(p){
   let blackHoleXDist = 120;
   let timerEllipseX = -10;
   let timerEllipseY = 0
-  let timerInterval = 9.1;
+  let timerInterval = 9;
 
   let backgroundFlashR = 100;
   let backgroundFlashG = 0;
@@ -333,9 +333,9 @@ export default function sketch(p){
             finalAsteroidSizeX = 0;
             finalAsteroidSizeY = 0;
             blackHoles(400, timerInterval*32);
-            if (timerEllipseY < 2000){
+            if (timerEllipseY < 40000){
               timerEllipseY++
-              if (timerEllipseY > timerInterval*64 && timerEllipseY < timerInterval*192){
+              if (timerEllipseY > timerInterval*64 && timerEllipseY < timerInterval*320){
                 p.background(backgroundFlashR, backgroundFlashG, backgroundFlashB)
                 //green control
                 if (backgroundGSwitch){
@@ -363,11 +363,156 @@ export default function sketch(p){
                     backgroundBSwitch = true;
                   }
                 }
-                p.fill(blackHole)
-                p.ellipse(640, 360, 200, 200)
+                if (timerEllipseY < timerInterval*192){
+                  p.fill(blackHole)
+                  p.ellipse(640, 360, 200, 200)
+                }
               }
 
             }
+
+            if (timerEllipseY > timerInterval*192 && timerEllipseY < timerInterval*208){
+              //green control
+              if (backgroundGSwitch){
+                backgroundFlashG+=20;
+                backgroundFlashR = backgroundFlashG;
+                if (backgroundFlashG >= 225){
+                  backgroundGSwitch = false;
+                }
+              }
+              else if (!backgroundGSwitch) {
+                backgroundFlashG-=20;
+                if (backgroundFlashG <= 30){
+                  backgroundGSwitch = true;
+                }
+              }
+              //blue control
+              if (backgroundBSwitch){
+                backgroundFlashB+=15;
+                if (backgroundFlashB >= 240){
+                  backgroundBSwitch = false;
+                }
+              }
+              else if (!backgroundBSwitch) {
+                backgroundFlashB-=15;
+                if (backgroundFlashB <= 15){
+                  backgroundBSwitch = true;
+                }
+              }
+            }
+
+            if (timerEllipseY > timerInterval*208 && timerEllipseY < timerInterval*224){
+              p.background('white')
+            }
+
+            if (timerEllipseY >= timerInterval*224 && timerEllipseY < timerInterval*240){
+              if (backgroundGSwitch){
+                backgroundFlashG+=20;
+                backgroundFlashR = backgroundFlashG;
+                if (backgroundFlashG >= 250){
+                  backgroundGSwitch = false;
+                }
+              }
+              else if (!backgroundGSwitch) {
+                backgroundFlashG-=20;
+                if (backgroundFlashG <= 0){
+                  backgroundGSwitch = true;
+                }
+              }
+              //blue control
+              if (backgroundBSwitch){
+                backgroundFlashB+=15;
+                if (backgroundFlashB >= 250){
+                  backgroundBSwitch = false;
+                }
+              }
+              else if (!backgroundBSwitch) {
+                backgroundFlashB-=15;
+                if (backgroundFlashB <= 0){
+                  backgroundBSwitch = true;
+                }
+              }
+            }
+
+            if (timerEllipseY > timerInterval*240 && timerEllipseY < timerInterval*256){
+              p.background('white')
+            }
+
+            if (timerEllipseY >= timerInterval*256 && timerEllipseY < timerInterval*272){
+              console.log('256 zone')
+              //green control
+              if (backgroundGSwitch){
+                backgroundFlashG+=20;
+                backgroundFlashR = backgroundFlashG;
+                if (backgroundFlashG >= 250){
+                  backgroundGSwitch = false;
+                }
+              }
+              else if (!backgroundGSwitch) {
+                backgroundFlashG-=20;
+                if (backgroundFlashG <= 0){
+                  backgroundGSwitch = true;
+                }
+              }
+              //blue control
+              if (backgroundBSwitch){
+                backgroundFlashB+=15;
+                if (backgroundFlashB >= 250){
+                  backgroundBSwitch = false;
+                }
+              }
+              else if (!backgroundBSwitch) {
+                backgroundFlashB-=15;
+                if (backgroundFlashB <= 0){
+                  backgroundBSwitch = true;
+                }
+              }
+            }
+
+            if (timerEllipseY > timerInterval*272 && timerEllipseY < timerInterval*288){
+              p.background('white')
+            }
+
+            if (timerEllipseY >= timerInterval*288 && timerEllipseY < timerInterval*320){
+              console.log("288 zone")
+              //green control
+              if (backgroundGSwitch){
+                backgroundFlashG+=20;
+                backgroundFlashR = backgroundFlashG;
+                if (backgroundFlashG >= 250){
+                  backgroundGSwitch = false;
+                }
+              }
+              else if (!backgroundGSwitch) {
+                backgroundFlashG-=20;
+                if (backgroundFlashG <= 0){
+                  backgroundGSwitch = true;
+                }
+              }
+              //blue control
+              if (backgroundBSwitch){
+                backgroundFlashB+=15;
+                if (backgroundFlashB >= 250){
+                  backgroundBSwitch = false;
+                }
+              }
+              else if (!backgroundBSwitch) {
+                backgroundFlashB-=15;
+                if (backgroundFlashB <= 0){
+                  backgroundBSwitch = true;
+                }
+              }
+            }
+
+            if (timerEllipseY >= timerInterval*320 && timerEllipseY > timerInterval*336){
+              console.log('white zone')
+              p.background(20, 0, 0)
+
+
+
+            }
+
+
 
           }
         }

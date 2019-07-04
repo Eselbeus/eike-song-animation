@@ -76,6 +76,11 @@ export default function sketch(p){
 
   let sixteenth = 40;
 
+  let missileX = 1;
+  let missileY = 1;
+  let linearX = 1280;
+  let linearY = 720;
+
   const sixteenAutomate = (x, y, sixteenth) => {
     p.ellipse(x, y, 7, 7);
     if (x >= 10+sixteenth){
@@ -474,7 +479,6 @@ export default function sketch(p){
             }
 
             if (timerEllipseY >= timerInterval*288 && timerEllipseY < timerInterval*320){
-              console.log("288 zone")
               //green control
               if (backgroundGSwitch){
                 backgroundFlashG+=20;
@@ -504,11 +508,33 @@ export default function sketch(p){
               }
             }
 
-            if (timerEllipseY >= timerInterval*320 && timerEllipseY > timerInterval*336){
-              console.log('white zone')
+            if (timerEllipseY >= timerInterval*320 && timerEllipseY < timerInterval*640){
               p.background(20, 0, 0)
-
-
+              let darkG = p.color(200, 200, 200)
+              p.fill(darkG);
+              let one = p.ellipse(missileX, missileY + 100, 2, 2)
+              let two = p.ellipse(1288 - missileX, missileY, 2, 2)
+              let three = p.ellipse(1280 - missileX, 700 - missileY, 2, 2)
+              let four = p.ellipse(missileX - 4, 720 - missileY, 2, 2)
+              let newMissiles = []
+              missileX++
+              missileY = missileY + 2
+              // missileY = missileY + (missileY)*(missileY)
+              if (missileY >= 620){
+                one = p.ellipse(missileX, linearY, 2, 2)
+                linearY--
+                if (linearY <= 10){
+                  one = p.ellipse(missileX, 10, 2, 2)
+                }
+              }
+              if (missileY <= 0){
+                four = p.ellipse(missileX - 4, linearY, 2, 2)
+              }
+              if (missileX % 5 === 0 ){
+                let missileXReps = missileX / 5 ;
+                let newM = p.ellipse(missileX - missileXReps, missileY + 100, 2, 2)
+                newMissiles.push(newM)
+              }
 
             }
 

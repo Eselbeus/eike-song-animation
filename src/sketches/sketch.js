@@ -371,6 +371,9 @@ export default function sketch(p){
                 if (timerEllipseY < timerInterval*192){
                   p.fill(blackHole)
                   p.ellipse(640, 360, 200, 200)
+                  let tBlackhole = p.color(0, 0, 0, 50)
+                  p.fill(tBlackhole)
+                  p.ellipse(640, 360, 220, 220)
                 }
               }
 

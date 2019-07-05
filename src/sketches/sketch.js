@@ -345,7 +345,7 @@ export default function sketch(p){
             finalAsteroidSizeX = 0;
             finalAsteroidSizeY = 0;
             blackHoles(400, timerInterval*32);
-            if (timerEllipseY < 40000){
+            if (timerEllipseY < 400000){
               timerEllipseY++
               if (timerEllipseY > timerInterval*64 && timerEllipseY < timerInterval*320){
                 p.background(backgroundFlashR, backgroundFlashG, backgroundFlashB)
@@ -530,7 +530,7 @@ export default function sketch(p){
               }
             }
 
-            if (timerEllipseY >= timerInterval*320 && timerEllipseY < timerInterval*436){
+            if (timerEllipseY >= timerInterval*320){
               p.background(20, 0, 0)
               let darkG = p.color(200, 200, 200)
               p.fill(darkG);
@@ -556,6 +556,11 @@ export default function sketch(p){
               console.log(newMissiles)
               missileX+=2
               missileY = missileY + 2
+              if (missileX >= 1280){
+                missileX = 1
+                missileY = 1
+                missileInit = 0
+              }
               // newM = p.ellipse(missileInit, missileY + 100, 2, 2)
               // missileY = missileY + (missileY)*(missileY)
               // if (missileY >= 620){
@@ -566,20 +571,58 @@ export default function sketch(p){
               //   }
               // }
             }
-            // if (timerEllipseY >= timerInterval*336 && timerEllipseY < timerInterval*636){
-            //   p.background(20, 0, 0)
-            //   let darkG = p.color(200, 200, 200)
-            //   p.fill(darkG);
-            //   for (let i = 0; i < missileInit; i++){
-            //     if (i % 10 === 0){
-            //       newMissiles.push(p.ellipse(missileX-i, missileY-i + 100, 2, 2))
-            //       newMissiles.push(p.ellipse(1288 - missileX - i, missileY + i, 2, 2))
-            //       newMissiles.push(p.ellipse(1280 - missileX + i, 700 - missileY + i, 2, 2))
-            //       newMissiles.push(p.ellipse(missileX-4-i, 720-missileY+i, 2, 2))
-            //     }
-            //   }
-            // }
 
+            if (timerEllipseY >= timerInterval*448 && timerEllipseY < timerInterval*636){
+              newMissiles = []
+              if (timerEllipseY >= timerInterval*448 && timerEllipseY < timerInterval*636){
+                p.background(backgroundFlashR, backgroundFlashG, backgroundFlashB)
+                //green control
+                if (backgroundGSwitch){
+                  backgroundFlashG+=5;
+                  if (backgroundFlashG >= 250){
+                    backgroundGSwitch = false;
+                  }
+                }
+                else if (!backgroundGSwitch) {
+                  backgroundFlashG-=5;
+                  if (backgroundFlashG <= 0){
+                    backgroundGSwitch = true;
+                  }
+                }
+                //blue control
+                if (backgroundBSwitch){
+                  backgroundFlashB+=10;
+                  if (backgroundFlashB >= 250){
+                    backgroundBSwitch = false;
+                  }
+                }
+                else if (!backgroundBSwitch) {
+                  backgroundFlashB-=10;
+                  if (backgroundFlashB <= 0){
+                    backgroundBSwitch = true;
+                  }
+                }
+                if (timerEllipseY < timerInterval*192){
+                  p.fill(blackHole)
+                  p.ellipse(640, 360, 200, 200)
+                  let tBlackhole = p.color(0, 0, 0, blackHoleOpacity)
+                  p.fill(tBlackhole)
+                  p.ellipse(640, 360, 220, 220)
+                  if (blackHoleSwitch){
+                    blackHoleOpacity++
+                    if (blackHoleOpacity >= 200){
+                      blackHoleSwitch = false
+                    }
+                  }
+                  if (!blackHoleSwitch){
+                    blackHoleOpacity--
+                    if (blackHoleOpacity <= 50){
+                      blackHoleSwitch = true
+                    }
+                  }
+                }
+              }
+            }
 
 
           }

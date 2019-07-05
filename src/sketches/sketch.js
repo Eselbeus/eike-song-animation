@@ -49,6 +49,8 @@ export default function sketch(p){
   let blackHoleXStart = 160;
   let blackHoleYStart = 100;
   let blackHoleXDist = 120;
+  let blackHoleOpacity = 50;
+  let blackHoleSwitch = true;
   let timerEllipseX = -10;
   let timerEllipseY = 0
   let timerInterval = 9;
@@ -80,6 +82,10 @@ export default function sketch(p){
   let missileY = 1;
   let linearX = 1280;
   let linearY = 720;
+
+  let missileInit = 0;
+  let newM;
+  let newMissiles = []
 
   const sixteenAutomate = (x, y, sixteenth) => {
     p.ellipse(x, y, 7, 7);
@@ -148,6 +154,7 @@ export default function sketch(p){
   p.setup = () => {
       canvas = p.createCanvas(1280, 720);
       p.noStroke();
+
   }
 
   p.draw = () => {
@@ -371,9 +378,21 @@ export default function sketch(p){
                 if (timerEllipseY < timerInterval*192){
                   p.fill(blackHole)
                   p.ellipse(640, 360, 200, 200)
-                  let tBlackhole = p.color(0, 0, 0, 50)
+                  let tBlackhole = p.color(0, 0, 0, blackHoleOpacity)
                   p.fill(tBlackhole)
                   p.ellipse(640, 360, 220, 220)
+                  if (blackHoleSwitch){
+                    blackHoleOpacity++
+                    if (blackHoleOpacity >= 200){
+                      blackHoleSwitch = false
+                    }
+                  }
+                  if (!blackHoleSwitch){
+                    blackHoleOpacity--
+                    if (blackHoleOpacity <= 50){
+                      blackHoleSwitch = true
+                    }
+                  }
                 }
               }
 
@@ -511,7 +530,7 @@ export default function sketch(p){
               }
             }
 
-            if (timerEllipseY >= timerInterval*320 && timerEllipseY < timerInterval*640){
+            if (timerEllipseY >= timerInterval*320 && timerEllipseY < timerInterval*436){
               p.background(20, 0, 0)
               let darkG = p.color(200, 200, 200)
               p.fill(darkG);
@@ -519,27 +538,47 @@ export default function sketch(p){
               let two = p.ellipse(1288 - missileX, missileY, 2, 2)
               let three = p.ellipse(1280 - missileX, 700 - missileY, 2, 2)
               let four = p.ellipse(missileX - 4, 720 - missileY, 2, 2)
-              let newMissiles = []
-              missileX++
-              missileY = missileY + 2
-              // missileY = missileY + (missileY)*(missileY)
-              if (missileY >= 620){
-                one = p.ellipse(missileX, linearY, 2, 2)
-                linearY--
-                if (linearY <= 10){
-                  one = p.ellipse(missileX, 10, 2, 2)
+              // newMissiles = []
+              console.log(missileInit)
+
+              // newMissiles.push(p.ellipse(missileX-missileInit, missileY + 100, 2, 2))
+              // newMissiles.push(p.ellipse(missileX-missileInit, missileY + 100 - missileInit, 2, 2))
+              for (let i = 0; i < missileInit; i++){
+                if (i % 10 === 0){
+                  newMissiles.push(p.ellipse(missileX-i, missileY-i + 100, 2, 2))
+                  newMissiles.push(p.ellipse(1288 - missileX - i, missileY + i, 2, 2))
+                  newMissiles.push(p.ellipse(1280 - missileX + i, 700 - missileY + i, 2, 2))
+                  newMissiles.push(p.ellipse(missileX-4-i, 720-missileY+i, 2, 2))
                 }
               }
-              if (missileY <= 0){
-                four = p.ellipse(missileX - 4, linearY, 2, 2)
-              }
-              if (missileX % 5 === 0 ){
-                let missileXReps = missileX / 5 ;
-                let newM = p.ellipse(missileX - missileXReps, missileY + 100, 2, 2)
-                newMissiles.push(newM)
-              }
 
+              missileInit+=1
+              console.log(newMissiles)
+              missileX+=2
+              missileY = missileY + 2
+              // newM = p.ellipse(missileInit, missileY + 100, 2, 2)
+              // missileY = missileY + (missileY)*(missileY)
+              // if (missileY >= 620){
+              //   one = p.ellipse(missileX, linearY, 2, 2)
+              //   linearY--
+              //   if (linearY <= 10){
+              //     one = p.ellipse(missileX, 10, 2, 2)
+              //   }
+              // }
             }
+            // if (timerEllipseY >= timerInterval*336 && timerEllipseY < timerInterval*636){
+            //   p.background(20, 0, 0)
+            //   let darkG = p.color(200, 200, 200)
+            //   p.fill(darkG);
+            //   for (let i = 0; i < missileInit; i++){
+            //     if (i % 10 === 0){
+            //       newMissiles.push(p.ellipse(missileX-i, missileY-i + 100, 2, 2))
+            //       newMissiles.push(p.ellipse(1288 - missileX - i, missileY + i, 2, 2))
+            //       newMissiles.push(p.ellipse(1280 - missileX + i, 700 - missileY + i, 2, 2))
+            //       newMissiles.push(p.ellipse(missileX-4-i, 720-missileY+i, 2, 2))
+            //     }
+            //   }
+            // }
 
 
 

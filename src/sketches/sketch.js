@@ -42,6 +42,7 @@ export default function sketch(p){
   let preChorus = 0;
   let sunColorRed = 200;
   let sunColorGreen = 200;
+  let sunColorBlue = 200;
   let earthColorRed = 0;
   let earthColorBlue = 200;
   let earthColorGreen = 150;
@@ -86,6 +87,8 @@ export default function sketch(p){
   let missileInit = 0;
   let newM;
   let newMissiles = []
+  let finalBlue = false;
+  let haloReducer = 800;
 
   const sixteenAutomate = (x, y, sixteenth) => {
     p.ellipse(x, y, 7, 7);
@@ -538,11 +541,7 @@ export default function sketch(p){
               let two = p.ellipse(1288 - missileX, missileY, 2, 2)
               let three = p.ellipse(1280 - missileX, 700 - missileY, 2, 2)
               let four = p.ellipse(missileX - 4, 720 - missileY, 2, 2)
-              // newMissiles = []
-              console.log(missileInit)
 
-              // newMissiles.push(p.ellipse(missileX-missileInit, missileY + 100, 2, 2))
-              // newMissiles.push(p.ellipse(missileX-missileInit, missileY + 100 - missileInit, 2, 2))
               for (let i = 0; i < missileInit; i++){
                 if (i % 10 === 0){
                   newMissiles.push(p.ellipse(missileX-i, missileY-i + 100, 2, 2))
@@ -553,28 +552,18 @@ export default function sketch(p){
               }
 
               missileInit+=1
-              console.log(newMissiles)
               missileX+=2
-              missileY = missileY + 2
+              missileY+=2
               if (missileX >= 1280){
                 missileX = 1
                 missileY = 1
                 missileInit = 0
               }
-              // newM = p.ellipse(missileInit, missileY + 100, 2, 2)
-              // missileY = missileY + (missileY)*(missileY)
-              // if (missileY >= 620){
-              //   one = p.ellipse(missileX, linearY, 2, 2)
-              //   linearY--
-              //   if (linearY <= 10){
-              //     one = p.ellipse(missileX, 10, 2, 2)
-              //   }
-              // }
             }
 
-            if (timerEllipseY >= timerInterval*448 && timerEllipseY < timerInterval*636){
+            if (timerEllipseY >= timerInterval*448 && timerEllipseY < timerInterval*704){
               newMissiles = []
-              if (timerEllipseY >= timerInterval*448 && timerEllipseY < timerInterval*636){
+              if (timerEllipseY >= timerInterval*448 && timerEllipseY < timerInterval*704){
                 p.background(backgroundFlashR, backgroundFlashG, backgroundFlashB)
                 //green control
                 if (backgroundGSwitch){
@@ -602,25 +591,29 @@ export default function sketch(p){
                     backgroundBSwitch = true;
                   }
                 }
-                if (timerEllipseY < timerInterval*192){
-                  p.fill(blackHole)
-                  p.ellipse(640, 360, 200, 200)
-                  let tBlackhole = p.color(0, 0, 0, blackHoleOpacity)
-                  p.fill(tBlackhole)
-                  p.ellipse(640, 360, 220, 220)
-                  if (blackHoleSwitch){
-                    blackHoleOpacity++
-                    if (blackHoleOpacity >= 200){
-                      blackHoleSwitch = false
-                    }
-                  }
-                  if (!blackHoleSwitch){
-                    blackHoleOpacity--
-                    if (blackHoleOpacity <= 50){
-                      blackHoleSwitch = true
-                    }
+
+                sunColorRed = 220;
+                sunColorGreen = 220;
+                sunSize = 80;
+                let secondSun = p.color(sunColorRed, sunColorGreen, sunColorBlue)
+                let halo = p.color(sunColorRed, sunColorGreen, sunColorBlue, 50)
+                p.fill(secondSun)
+                p.ellipse(640, 360, sunSize, sunSize)
+                p.fill(halo)
+                p.ellipse(640, 360, haloReducer, haloReducer)
+                if (!finalBlue){
+                  sunColorBlue++
+                  if (sunColorBlue >= 255){
+                    finalBlue = true
                   }
                 }
+                else if (finalBlue){
+                  sunColorBlue--
+                }
+                if (haloReducer >= 100){
+                  haloReducer--
+                }
+
               }
             }
 

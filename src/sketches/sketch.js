@@ -533,7 +533,7 @@ export default function sketch(p){
               }
             }
 
-            if (timerEllipseY >= timerInterval*320){
+            if (timerEllipseY >= timerInterval*320 && timerEllipseY < timerInterval*704){
               p.background(20, 0, 0)
               let darkG = p.color(200, 200, 200)
               p.fill(darkG);
@@ -567,26 +567,26 @@ export default function sketch(p){
                 p.background(backgroundFlashR, backgroundFlashG, backgroundFlashB)
                 //green control
                 if (backgroundGSwitch){
-                  backgroundFlashG+=5;
+                  backgroundFlashG+=2;
                   if (backgroundFlashG >= 250){
                     backgroundGSwitch = false;
                   }
                 }
                 else if (!backgroundGSwitch) {
-                  backgroundFlashG-=5;
+                  backgroundFlashG-=2;
                   if (backgroundFlashG <= 0){
                     backgroundGSwitch = true;
                   }
                 }
                 //blue control
                 if (backgroundBSwitch){
-                  backgroundFlashB+=10;
+                  backgroundFlashB+=5;
                   if (backgroundFlashB >= 250){
                     backgroundBSwitch = false;
                   }
                 }
                 else if (!backgroundBSwitch) {
-                  backgroundFlashB-=10;
+                  backgroundFlashB-=5;
                   if (backgroundFlashB <= 0){
                     backgroundBSwitch = true;
                   }
@@ -615,6 +615,175 @@ export default function sketch(p){
                 }
 
               }
+            }
+            //192 576 - 208 592
+            if (timerEllipseY > timerInterval*576 && timerEllipseY < timerInterval*592){
+              //green control
+              if (backgroundGSwitch){
+                backgroundFlashG+=10;
+                backgroundFlashR = backgroundFlashG;
+                if (backgroundFlashG >= 225){
+                  backgroundGSwitch = false;
+                }
+              }
+              else if (!backgroundGSwitch) {
+                backgroundFlashG-=10;
+                if (backgroundFlashG <= 30){
+                  backgroundGSwitch = true;
+                }
+              }
+              //blue control
+              if (backgroundBSwitch){
+                backgroundFlashB+=5;
+                if (backgroundFlashB >= 240){
+                  backgroundBSwitch = false;
+                }
+              }
+              else if (!backgroundBSwitch) {
+                backgroundFlashB-=5;
+                if (backgroundFlashB <= 15){
+                  backgroundBSwitch = true;
+                }
+              }
+            }
+            //208 592 - 224 608
+            if (timerEllipseY > timerInterval*592 && timerEllipseY < timerInterval*608){
+              p.background('white')
+              let secondSun = p.color(sunColorRed, sunColorGreen, sunColorBlue)
+              let halo = p.color(sunColorRed, sunColorGreen, sunColorBlue, 50)
+              p.fill(secondSun)
+              p.ellipse(640, 360, sunSize, sunSize)
+              p.fill(halo)
+              p.ellipse(640, 360, haloReducer, haloReducer)
+            }
+            //224 608 - 240 624
+            if (timerEllipseY >= timerInterval*608 && timerEllipseY < timerInterval*624){
+              if (backgroundGSwitch){
+                backgroundFlashG+=10;
+                backgroundFlashR = backgroundFlashG;
+                if (backgroundFlashG >= 250){
+                  backgroundGSwitch = false;
+                }
+              }
+              else if (!backgroundGSwitch) {
+                backgroundFlashG-=10;
+                if (backgroundFlashG <= 0){
+                  backgroundGSwitch = true;
+                }
+              }
+              //blue control
+              if (backgroundBSwitch){
+                backgroundFlashB+=5;
+                if (backgroundFlashB >= 250){
+                  backgroundBSwitch = false;
+                }
+              }
+              else if (!backgroundBSwitch) {
+                backgroundFlashB-=5;
+                if (backgroundFlashB <= 0){
+                  backgroundBSwitch = true;
+                }
+              }
+            }
+            //240 624 - 256 640
+            if (timerEllipseY > timerInterval*624 && timerEllipseY < timerInterval*640){
+              p.background('white')
+              let secondSun = p.color(sunColorRed, sunColorGreen, sunColorBlue)
+              let halo = p.color(sunColorRed, sunColorGreen, sunColorBlue, 50)
+              p.fill(secondSun)
+              p.ellipse(640, 360, sunSize, sunSize)
+              p.fill(halo)
+              p.ellipse(640, 360, haloReducer, haloReducer)
+            }
+            //256 640 - 272 656
+            if (timerEllipseY >= timerInterval*640 && timerEllipseY < timerInterval*656){
+              console.log('256 zone')
+              //green control
+              if (backgroundGSwitch){
+                backgroundFlashG+=10;
+                backgroundFlashR = backgroundFlashG;
+                if (backgroundFlashG >= 250){
+                  backgroundGSwitch = false;
+                }
+              }
+              else if (!backgroundGSwitch) {
+                backgroundFlashG-=10;
+                if (backgroundFlashG <= 0){
+                  backgroundGSwitch = true;
+                }
+              }
+              //blue control
+              if (backgroundBSwitch){
+                backgroundFlashB+=5;
+                if (backgroundFlashB >= 250){
+                  backgroundBSwitch = false;
+                }
+              }
+              else if (!backgroundBSwitch) {
+                backgroundFlashB-=5;
+                if (backgroundFlashB <= 0){
+                  backgroundBSwitch = true;
+                }
+              }
+            }
+            //272 656 - 288 672
+            if (timerEllipseY > timerInterval*656 && timerEllipseY < timerInterval*672){
+              p.background('white')
+              let secondSun = p.color(sunColorRed, sunColorGreen, sunColorBlue)
+              let halo = p.color(sunColorRed, sunColorGreen, sunColorBlue, 50)
+              p.fill(secondSun)
+              p.ellipse(640, 360, sunSize, sunSize)
+              p.fill(halo)
+              p.ellipse(640, 360, haloReducer, haloReducer)
+            }
+            //288 672 - 320 704
+            if (timerEllipseY >= timerInterval*320 && timerEllipseY < timerInterval*704){
+              //green control
+              if (backgroundGSwitch){
+                backgroundFlashG+=10;
+                backgroundFlashR = backgroundFlashG;
+                if (backgroundFlashG >= 250){
+                  backgroundGSwitch = false;
+                }
+              }
+              else if (!backgroundGSwitch) {
+                backgroundFlashG-=10;
+                if (backgroundFlashG <= 0){
+                  backgroundGSwitch = true;
+                }
+              }
+              //blue control
+              if (backgroundBSwitch){
+                backgroundFlashB+=5;
+                if (backgroundFlashB >= 250){
+                  backgroundBSwitch = false;
+                }
+              }
+              else if (!backgroundBSwitch) {
+                backgroundFlashB-=5;
+                if (backgroundFlashB <= 0){
+                  backgroundBSwitch = true;
+                }
+              }
+            }
+            if (timerEllipseY >= timerInterval*704 && timerEllipseY < timerInterval*760){
+              p.background('black')
+              let secondSun = p.color(sunColorRed, sunColorGreen, sunColorBlue)
+              let halo = p.color(sunColorRed, sunColorGreen, sunColorBlue, 50)
+              p.fill(230, 230, 0)
+              p.ellipse(640, 360, sunSize, sunSize)
+              p.fill(230, 230, 0, 50)
+              p.ellipse(640, 360, haloReducer, haloReducer)
+
+              xEarth = 640 + (150 * p.cos(angleEarth))
+              yEarth = 360 + (170 * p.sin(angleEarth))
+
+              p.fill(0, 150, 200)
+              p.ellipse(xEarth, yEarth, 20, 20)
+              // angleEarth = angleEarth + 0.04
+
+
+
             }
 
 

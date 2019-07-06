@@ -62,6 +62,8 @@ export default function sketch(p){
   let backgroundRSwitch = true;
   let backgroundGSwitch = true;
   let backgroundBSwitch = true;
+  let blueBack;
+  let blueBackTrue = true;
 
   let xEarth = x9 + (150 * p.cos(angleEarth))
   let yEarth = y9 + (170 * p.sin(angleEarth))
@@ -334,7 +336,9 @@ export default function sketch(p){
           }
 
           if (astX <= 280){
-            p.background(0, 0, 140);
+            if (blueBackTrue){
+              blueBack = p.background(0, 0, 140);
+            }
             let ast = p.ellipse(astX, astY, finalAsteroidSizeX, finalAsteroidSizeY)
             astX+=0.25
             astY-=0.2
@@ -766,20 +770,27 @@ export default function sketch(p){
                 }
               }
             }
-            if (timerEllipseY >= timerInterval*704 && timerEllipseY < timerInterval*760){
+            if (timerEllipseY >= timerInterval*704 && timerEllipseY < timerInterval*768){
+              blueBackTrue = false;
               p.background('black')
               let secondSun = p.color(sunColorRed, sunColorGreen, sunColorBlue)
               let halo = p.color(sunColorRed, sunColorGreen, sunColorBlue, 50)
-              p.fill(230, 230, 0)
-              p.ellipse(640, 360, sunSize, sunSize)
-              p.fill(230, 230, 0, 50)
-              p.ellipse(640, 360, haloReducer, haloReducer)
+              if (timerInterval < 767){
+                p.fill(230, 230, 0)
+                p.ellipse(640, 360, sunSize, sunSize)
+                p.fill(230, 230, 0, 50)
+                p.ellipse(640, 360, haloReducer, haloReducer)
 
-              xEarth = 640 + (150 * p.cos(angleEarth))
-              yEarth = 360 + (170 * p.sin(angleEarth))
+                xEarth = 640 + (150 * p.cos(angleEarth))
+                yEarth = 360 + (170 * p.sin(angleEarth))
 
-              p.fill(0, 150, 200)
-              p.ellipse(xEarth, yEarth, 20, 20)
+                p.fill(0, 150, 200)
+                p.ellipse(xEarth, yEarth, 20, 20)
+              }
+              if (timerEllipseY === timerInterval*767){
+                p.fill(254, 254, 254)
+                p.ellipse(640, 320, 720, 720)
+              }
               // angleEarth = angleEarth + 0.04
 
 

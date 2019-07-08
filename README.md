@@ -6,5 +6,7 @@ Everything I Know Explodes is a song by Symfinity. Music and lyrics by Seann Bra
 For the original music video: [Symfinity - Everything I Know Explodes](https://www.youtube.com/watch?v=tEVvAQo89fo "Symfinity - Everything I Know Explodes")
 
 This is animation intended to be used with live performances with the band when video capability is present.
+This is the video with the song: https://youtu.be/_zwWNfqWzLc
+Actual video for performances will be paired with a backing track instead.
 
-*created by Seann Branchfield, full-stack web developer and lead singer of Symfinity*
+*Created by Seann Branchfield, full-stack web developer and lead singer of Symfinity*

@@ -9,31 +9,21 @@ export default function sketch(p){
   let left = true;
   let x3 = 10;
   let y3 = y+(ySpace*2);
-  let right3 = true;
   let x4 = 1270;
   let y4 = y+(ySpace*3);
-  let right4 = true;
   let x5 = 10;
   let y5 = y;
-  let right5 = true;
   let x6 = 1270;
   let y6 = y+ySpace;
-  let right6 = true;
   let x7 = 10;
   let y7 = y+(ySpace*2);
-  let right7 = true;
   let x8 = 1270;
   let y8 = y+(ySpace*3);
-  let right8 = true;
   let x9 = 640;
   let y9 = 360;
-  let right9 = true;
   let x10 = 640;
   let y10 = 360;
-  let right10 = true;
-  let x11 = 11;
-  let y11 = 110;
-  let right11 = true;
+
   let sun = 100;
   let sunBright = true;
   let angleEarth = 0;
@@ -59,6 +49,7 @@ export default function sketch(p){
   let backgroundFlashR = 100;
   let backgroundFlashG = 0;
   let backgroundFlashB = 0;
+  let flashChangeValue = 5;
   let backgroundRSwitch = true;
   let backgroundGSwitch = true;
   let backgroundBSwitch = true;
@@ -83,14 +74,12 @@ export default function sketch(p){
 
   let missileX = 1;
   let missileY = 1;
-  let linearX = 1280;
-  let linearY = 720;
-
   let missileInit = 0;
-  let newM;
+
   let newMissiles = []
   let finalBlue = false;
   let haloReducer = 800;
+  let secondHalo = 200;
 
   const sixteenAutomate = (x, y, sixteenth) => {
     p.ellipse(x, y, 7, 7);
@@ -174,7 +163,7 @@ export default function sketch(p){
       }
 
       if (x >= 660){
-        c = p.color(0, 0, 255)
+        c = p.color(0, 255, 0)
         p.fill(c)
         sixteenAutomate(x2, y2, -sixteenth);
         if (left){
@@ -191,7 +180,7 @@ export default function sketch(p){
         }
       }
       if (x3 >= 660){
-        c = p.color(0, 0, 255)
+        c = p.color(0, 255, 0)
         p.fill(c)
         sixteenAutomate(x4, y4, -sixteenth);
         if (left){
@@ -209,7 +198,7 @@ export default function sketch(p){
       }
 
       if (x5 >= 660){
-        c = p.color(0, 0, 255)
+        c = p.color(0, 255, 0)
         p.fill(c)
         sixteenAutomate(x6, y6, -sixteenth);
         if (left){
@@ -227,7 +216,7 @@ export default function sketch(p){
       }
 
       if (x7 >= 660){
-        c = p.color(0, 0, 255)
+        c = p.color(0, 255, 0)
         p.fill(c)
         sixteenAutomate(x8, y8, -sixteenth);
         if (left){
@@ -358,26 +347,26 @@ export default function sketch(p){
                 p.background(backgroundFlashR, backgroundFlashG, backgroundFlashB)
                 //green control
                 if (backgroundGSwitch){
-                  backgroundFlashG+=5;
+                  backgroundFlashG+=(flashChangeValue/2);
                   if (backgroundFlashG >= 250){
                     backgroundGSwitch = false;
                   }
                 }
                 else if (!backgroundGSwitch) {
-                  backgroundFlashG-=5;
+                  backgroundFlashG-=(flashChangeValue/2);
                   if (backgroundFlashG <= 0){
                     backgroundGSwitch = true;
                   }
                 }
                 //blue control
                 if (backgroundBSwitch){
-                  backgroundFlashB+=10;
+                  backgroundFlashB+=flashChangeValue;
                   if (backgroundFlashB >= 250){
                     backgroundBSwitch = false;
                   }
                 }
                 else if (!backgroundBSwitch) {
-                  backgroundFlashB-=10;
+                  backgroundFlashB-=flashChangeValue;
                   if (backgroundFlashB <= 0){
                     backgroundBSwitch = true;
                   }
@@ -408,27 +397,27 @@ export default function sketch(p){
             if (timerEllipseY > timerInterval*192 && timerEllipseY < timerInterval*208){
               //green control
               if (backgroundGSwitch){
-                backgroundFlashG+=20;
+                backgroundFlashG+=(flashChangeValue*2);
                 backgroundFlashR = backgroundFlashG;
                 if (backgroundFlashG >= 225){
                   backgroundGSwitch = false;
                 }
               }
               else if (!backgroundGSwitch) {
-                backgroundFlashG-=20;
+                backgroundFlashG-=(flashChangeValue*2);
                 if (backgroundFlashG <= 30){
                   backgroundGSwitch = true;
                 }
               }
               //blue control
               if (backgroundBSwitch){
-                backgroundFlashB+=15;
+                backgroundFlashB+=flashChangeValue;
                 if (backgroundFlashB >= 240){
                   backgroundBSwitch = false;
                 }
               }
               else if (!backgroundBSwitch) {
-                backgroundFlashB-=15;
+                backgroundFlashB-=flashChangeValue;
                 if (backgroundFlashB <= 15){
                   backgroundBSwitch = true;
                 }
@@ -441,27 +430,27 @@ export default function sketch(p){
 
             if (timerEllipseY >= timerInterval*224 && timerEllipseY < timerInterval*240){
               if (backgroundGSwitch){
-                backgroundFlashG+=20;
+                backgroundFlashG+=(flashChangeValue*2);
                 backgroundFlashR = backgroundFlashG;
                 if (backgroundFlashG >= 250){
                   backgroundGSwitch = false;
                 }
               }
               else if (!backgroundGSwitch) {
-                backgroundFlashG-=20;
+                backgroundFlashG-=(flashChangeValue*2);
                 if (backgroundFlashG <= 0){
                   backgroundGSwitch = true;
                 }
               }
               //blue control
               if (backgroundBSwitch){
-                backgroundFlashB+=15;
+                backgroundFlashB+=flashChangeValue;
                 if (backgroundFlashB >= 250){
                   backgroundBSwitch = false;
                 }
               }
               else if (!backgroundBSwitch) {
-                backgroundFlashB-=15;
+                backgroundFlashB-=flashChangeValue;
                 if (backgroundFlashB <= 0){
                   backgroundBSwitch = true;
                 }
@@ -473,30 +462,29 @@ export default function sketch(p){
             }
 
             if (timerEllipseY >= timerInterval*256 && timerEllipseY < timerInterval*272){
-              console.log('256 zone')
               //green control
               if (backgroundGSwitch){
-                backgroundFlashG+=20;
+                backgroundFlashG+=(flashChangeValue*2);
                 backgroundFlashR = backgroundFlashG;
                 if (backgroundFlashG >= 250){
                   backgroundGSwitch = false;
                 }
               }
               else if (!backgroundGSwitch) {
-                backgroundFlashG-=20;
+                backgroundFlashG-=(flashChangeValue*2);
                 if (backgroundFlashG <= 0){
                   backgroundGSwitch = true;
                 }
               }
               //blue control
               if (backgroundBSwitch){
-                backgroundFlashB+=15;
+                backgroundFlashB+=flashChangeValue;
                 if (backgroundFlashB >= 250){
                   backgroundBSwitch = false;
                 }
               }
               else if (!backgroundBSwitch) {
-                backgroundFlashB-=15;
+                backgroundFlashB-=flashChangeValue;
                 if (backgroundFlashB <= 0){
                   backgroundBSwitch = true;
                 }
@@ -510,27 +498,27 @@ export default function sketch(p){
             if (timerEllipseY >= timerInterval*288 && timerEllipseY < timerInterval*320){
               //green control
               if (backgroundGSwitch){
-                backgroundFlashG+=20;
+                backgroundFlashG+=(flashChangeValue*2);
                 backgroundFlashR = backgroundFlashG;
                 if (backgroundFlashG >= 250){
                   backgroundGSwitch = false;
                 }
               }
               else if (!backgroundGSwitch) {
-                backgroundFlashG-=20;
+                backgroundFlashG-=(flashChangeValue*2);
                 if (backgroundFlashG <= 0){
                   backgroundGSwitch = true;
                 }
               }
               //blue control
               if (backgroundBSwitch){
-                backgroundFlashB+=15;
+                backgroundFlashB+=flashChangeValue;
                 if (backgroundFlashB >= 250){
                   backgroundBSwitch = false;
                 }
               }
               else if (!backgroundBSwitch) {
-                backgroundFlashB-=15;
+                backgroundFlashB-=flashChangeValue;
                 if (backgroundFlashB <= 0){
                   backgroundBSwitch = true;
                 }
@@ -541,10 +529,10 @@ export default function sketch(p){
               p.background(20, 0, 0)
               let darkG = p.color(200, 200, 200)
               p.fill(darkG);
-              let one = p.ellipse(missileX, missileY + 100, 2, 2)
-              let two = p.ellipse(1288 - missileX, missileY, 2, 2)
-              let three = p.ellipse(1280 - missileX, 700 - missileY, 2, 2)
-              let four = p.ellipse(missileX - 4, 720 - missileY, 2, 2)
+              p.ellipse(missileX, missileY + 100, 2, 2)
+              p.ellipse(1288 - missileX, missileY, 2, 2)
+              p.ellipse(1280 - missileX, 700 - missileY, 2, 2)
+              p.ellipse(missileX - 4, 720 - missileY, 2, 2)
 
               for (let i = 0; i < missileInit; i++){
                 if (i % 10 === 0){
@@ -571,26 +559,26 @@ export default function sketch(p){
                 p.background(backgroundFlashR, backgroundFlashG, backgroundFlashB)
                 //green control
                 if (backgroundGSwitch){
-                  backgroundFlashG+=2;
+                  backgroundFlashG+=flashChangeValue;
                   if (backgroundFlashG >= 250){
                     backgroundGSwitch = false;
                   }
                 }
                 else if (!backgroundGSwitch) {
-                  backgroundFlashG-=2;
+                  backgroundFlashG-=flashChangeValue;
                   if (backgroundFlashG <= 0){
                     backgroundGSwitch = true;
                   }
                 }
                 //blue control
                 if (backgroundBSwitch){
-                  backgroundFlashB+=5;
+                  backgroundFlashB+=flashChangeValue;
                   if (backgroundFlashB >= 250){
                     backgroundBSwitch = false;
                   }
                 }
                 else if (!backgroundBSwitch) {
-                  backgroundFlashB-=5;
+                  backgroundFlashB-=flashChangeValue;
                   if (backgroundFlashB <= 0){
                     backgroundBSwitch = true;
                   }
@@ -617,34 +605,39 @@ export default function sketch(p){
                 if (haloReducer >= 100){
                   haloReducer--
                 }
-
+                if (timerEllipseY > timerInterval*512 && timerEllipseY < timerInterval*576){
+                  let lightHalo = p.color(220, 220, 0, secondHalo)
+                  p.fill(lightHalo)
+                  p.ellipse(640, 360, haloReducer*4, haloReducer*4)
+                  secondHalo--
+                }
               }
             }
             //192 576 - 208 592
             if (timerEllipseY > timerInterval*576 && timerEllipseY < timerInterval*592){
               //green control
               if (backgroundGSwitch){
-                backgroundFlashG+=10;
+                backgroundFlashG+=(flashChangeValue);
                 backgroundFlashR = backgroundFlashG;
                 if (backgroundFlashG >= 225){
                   backgroundGSwitch = false;
                 }
               }
               else if (!backgroundGSwitch) {
-                backgroundFlashG-=10;
+                backgroundFlashG-=(flashChangeValue);
                 if (backgroundFlashG <= 30){
                   backgroundGSwitch = true;
                 }
               }
               //blue control
               if (backgroundBSwitch){
-                backgroundFlashB+=5;
+                backgroundFlashB+=flashChangeValue;
                 if (backgroundFlashB >= 240){
                   backgroundBSwitch = false;
                 }
               }
               else if (!backgroundBSwitch) {
-                backgroundFlashB-=5;
+                backgroundFlashB-=flashChangeValue;
                 if (backgroundFlashB <= 15){
                   backgroundBSwitch = true;
                 }
@@ -663,27 +656,27 @@ export default function sketch(p){
             //224 608 - 240 624
             if (timerEllipseY >= timerInterval*608 && timerEllipseY < timerInterval*624){
               if (backgroundGSwitch){
-                backgroundFlashG+=10;
+                backgroundFlashG+=(flashChangeValue*2);
                 backgroundFlashR = backgroundFlashG;
                 if (backgroundFlashG >= 250){
                   backgroundGSwitch = false;
                 }
               }
               else if (!backgroundGSwitch) {
-                backgroundFlashG-=10;
+                backgroundFlashG-=(flashChangeValue*2);
                 if (backgroundFlashG <= 0){
                   backgroundGSwitch = true;
                 }
               }
               //blue control
               if (backgroundBSwitch){
-                backgroundFlashB+=5;
+                backgroundFlashB+=flashChangeValue;
                 if (backgroundFlashB >= 250){
                   backgroundBSwitch = false;
                 }
               }
               else if (!backgroundBSwitch) {
-                backgroundFlashB-=5;
+                backgroundFlashB-=flashChangeValue;
                 if (backgroundFlashB <= 0){
                   backgroundBSwitch = true;
                 }
@@ -701,30 +694,29 @@ export default function sketch(p){
             }
             //256 640 - 272 656
             if (timerEllipseY >= timerInterval*640 && timerEllipseY < timerInterval*656){
-              console.log('256 zone')
               //green control
               if (backgroundGSwitch){
-                backgroundFlashG+=10;
+                backgroundFlashG+=(flashChangeValue*2);
                 backgroundFlashR = backgroundFlashG;
                 if (backgroundFlashG >= 250){
                   backgroundGSwitch = false;
                 }
               }
               else if (!backgroundGSwitch) {
-                backgroundFlashG-=10;
+                backgroundFlashG-=(flashChangeValue*2);
                 if (backgroundFlashG <= 0){
                   backgroundGSwitch = true;
                 }
               }
               //blue control
               if (backgroundBSwitch){
-                backgroundFlashB+=5;
+                backgroundFlashB+=flashChangeValue;
                 if (backgroundFlashB >= 250){
                   backgroundBSwitch = false;
                 }
               }
               else if (!backgroundBSwitch) {
-                backgroundFlashB-=5;
+                backgroundFlashB-=flashChangeValue;
                 if (backgroundFlashB <= 0){
                   backgroundBSwitch = true;
                 }
@@ -744,27 +736,27 @@ export default function sketch(p){
             if (timerEllipseY >= timerInterval*320 && timerEllipseY < timerInterval*704){
               //green control
               if (backgroundGSwitch){
-                backgroundFlashG+=10;
+                backgroundFlashG+=(flashChangeValue*2);
                 backgroundFlashR = backgroundFlashG;
                 if (backgroundFlashG >= 250){
                   backgroundGSwitch = false;
                 }
               }
               else if (!backgroundGSwitch) {
-                backgroundFlashG-=10;
+                backgroundFlashG-=(flashChangeValue*2);
                 if (backgroundFlashG <= 0){
                   backgroundGSwitch = true;
                 }
               }
               //blue control
               if (backgroundBSwitch){
-                backgroundFlashB+=5;
+                backgroundFlashB+=flashChangeValue;
                 if (backgroundFlashB >= 250){
                   backgroundBSwitch = false;
                 }
               }
               else if (!backgroundBSwitch) {
-                backgroundFlashB-=5;
+                backgroundFlashB-=flashChangeValue;
                 if (backgroundFlashB <= 0){
                   backgroundBSwitch = true;
                 }
@@ -791,9 +783,6 @@ export default function sketch(p){
                 p.fill(254, 254, 254)
                 p.ellipse(640, 320, 720, 720)
               }
-              // angleEarth = angleEarth + 0.04
-
-
 
             }
 
